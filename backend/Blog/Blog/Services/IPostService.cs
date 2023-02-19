@@ -1,13 +1,15 @@
 ﻿using System;
-using Blog.Domain;
+using Blog.DTO.Post;
+using Domain.Models;
 
 namespace Blog.Services
 {
     public interface IPostService
     {
-        List<Post> GetPosts();
-        Post GetPostById(int postId);
-        bool UpdatePost(Post UpdatedPost);
+        List<PostDTO> GetPosts();
+        PostDTO GetPostById(int postId);
+        PostDTO CreatePost(CreatePostDTO newPoset);
+        bool UpdatePost(UpdatePostDTO updatedPost);
         bool DeletePost(int postId);
     }
 }

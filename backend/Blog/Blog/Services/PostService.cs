@@ -1,34 +1,56 @@
 ﻿using System;
-using Blog.Domain;
+using Blog.DTO.Post;
 
 namespace Blog.Services
 {
     public class PostService : IPostService
     {
-        private readonly List<Post> _posts;
+        private readonly List<PostDTO> _posts;
 
         public PostService()
         {
-            _posts = new List<Post>();
+            _posts = new List<PostDTO>();
         }
 
-        public List<Post> GetPosts()
+        public List<PostDTO> GetPosts()
         {
             return _posts;
         }
 
-        public Post GetPostById(int postId)
+        public PostDTO GetPostById(int postId)
         {
             return _posts.SingleOrDefault(p => p.Id == postId);
         }
 
-        public bool UpdatePost(Post UpdatedPost)
+        public PostDTO CreatePost(CreatePostDTO newPost)
         {
-            var exists = GetPostById(UpdatedPost.Id) is not null;
+            var post = new PostDTO()
+            {
+                Id = _posts.Count + 1,
+                Category = newPost.Category,
+                Content = newPost.Content,
+                CreatedAt = DateTime.UtcNow
+            };
+            _posts.Add(post);
+            return post;
+        }
+
+        public bool UpdatePost(UpdatePostDTO updatedPost)
+        {
+            var oldPost = GetPostById(updatedPost.Id);
+            var exists = oldPost is not null;
             if (exists)
             {
-                var index = _posts.FindIndex(x => x.Id == UpdatedPost.Id);
-                _posts[index] = UpdatedPost;
+                var index = _posts.FindIndex(x => x.Id == updatedPost.Id);
+                var updatePost = new PostDTO()
+                {
+                    Id = updatedPost.Id,
+                    Category = updatedPost.Category,
+                    Content = updatedPost.Content,
+                    CreatedAt = oldPost!.CreatedAt,
+                    UpdatedAt = DateTime.UtcNow
+                };
+                _posts[index] = updatePost;
                 return true;
             }
             return false;

@@ -12,18 +12,25 @@
 
   <ItemGroup>
     <None Remove="Command\" />
-    <None Remove="Domain\" />
     <None Remove="Controllers\V1\" />
     <None Remove="Contracts\" />
     <None Remove="Contracts\V1\" />
     <None Remove="Service\" />
+    <None Remove="DTO\" />
+    <None Remove="DTO\Post\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Command\" />
-    <Folder Include="Domain\" />
     <Folder Include="Controllers\V1\" />
     <Folder Include="Contracts\" />
     <Folder Include="Contracts\V1\" />
     <Folder Include="Services\" />
+    <Folder Include="DTO\" />
+    <Folder Include="DTO\Post\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\Domain.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
   </ItemGroup>
 </Project>

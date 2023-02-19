@@ -1,4 +1,5 @@
 ﻿using Blog.Contracts.V1;
+using Blog.DTO.Post;
 using Blog.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,13 +16,13 @@ public class PostController : ControllerBase
     }
 
     [HttpGet(ApiRoutes.Posts.GetAll)]
-    public IActionResult GetAllPosts()
+    public ActionResult<List<PostDTO>> GetAllPosts()
     {
         return Ok(_postService.GetPosts()); 
     }
 
     [HttpGet(ApiRoutes.Posts.Get)]
-    public IActionResult GetPostById(int postId)
+    public ActionResult<PostDTO> GetPostById(int postId)
     {
         var post = _postService.GetPostById(postId);
         if (post is null)
@@ -32,22 +33,31 @@ public class PostController : ControllerBase
     }
 
     [HttpPost(ApiRoutes.Posts.Create)]
-    public string WriteNewPost()
+    public ActionResult<PostDTO> CreatePost(CreatePostDTO newPost)
     {
-
-        return "post";
+        return Ok(_postService.CreatePost(newPost));
     }
 
     [HttpPut(ApiRoutes.Posts.Update)]
-    public string UpdatePost(int postId)
+    public ActionResult UpdatePost(UpdatePostDTO updatePost)
     {
-        return $"{postId}";
+        var result = _postService.UpdatePost(updatePost);
+        if (result is true)
+        {
+            return NoContent();
+        }
+        return BadRequest();
     }
 
     [HttpDelete(ApiRoutes.Posts.Delete)]
-    public string DeletePost(int postId)
+    public ActionResult DeletePost(int postId)
     {
-        return $"{postId}";
+        var result = _postService.DeletePost(postId);
+        if (result is true)
+        {
+            return NoContent();
+        }
+        return BadRequest();
     }
 }
 
