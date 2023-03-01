@@ -13,7 +13,7 @@ namespace Blog.Contracts.V1
 
             public const string Create = PostBase;
             public const string Get = PostBase + "/{postId}";
-            public const string GetAll = PostBase + "/all";
+            public const string GetAll = PostBase;
             public const string Update = PostBase + "/{postId}";
             public const string Delete = PostBase + "/{postId}";
         }

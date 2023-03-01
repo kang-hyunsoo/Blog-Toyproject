@@ -36,16 +36,16 @@ namespace Blog.Services
             return post;
         }
 
-        public bool UpdatePost(UpdatePostDTO updatedPost)
+        public bool UpdatePost(int postId, UpdatePostDTO updatedPost)
         {
-            var oldPost = GetPostById(updatedPost.Id);
+            var oldPost = GetPostById(postId);
             var exists = oldPost is not null;
             if (exists)
             {
-                var index = _posts.FindIndex(x => x.Id == updatedPost.Id);
+                var index = _posts.FindIndex(x => x.Id == postId);
                 var updatePost = new PostDTO()
                 {
-                    Id = updatedPost.Id,
+                    Id = postId,
                     Title = updatedPost.Title,
                     Category = updatedPost.Category,
                     Content = updatedPost.Content,

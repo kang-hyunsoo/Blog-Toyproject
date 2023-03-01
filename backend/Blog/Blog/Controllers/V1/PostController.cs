@@ -22,7 +22,7 @@ public class PostController : ControllerBase
     }
 
     [HttpGet(ApiRoutes.Posts.Get)]
-    public ActionResult<PostDTO> GetPostById(int postId)
+    public ActionResult GetPostById(int postId)
     {
         var post = _postService.GetPostById(postId);
         if (post is null)
@@ -39,12 +39,12 @@ public class PostController : ControllerBase
     }
 
     [HttpPut(ApiRoutes.Posts.Update)]
-    public ActionResult UpdatePost(UpdatePostDTO updatePost)
+    public ActionResult UpdatePost(int postId, UpdatePostDTO updatePost)
     {
-        var result = _postService.UpdatePost(updatePost);
+        var result = _postService.UpdatePost(postId, updatePost);
         if (result is true)
         {
-            return NoContent();
+            return GetPostById(postId);
         }
         return BadRequest();
     }
