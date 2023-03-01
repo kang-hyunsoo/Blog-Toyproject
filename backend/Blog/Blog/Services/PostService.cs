@@ -27,6 +27,7 @@ namespace Blog.Services
             var post = new PostDTO()
             {
                 Id = _posts.Count + 1,
+                Title = newPost.Title,
                 Category = newPost.Category,
                 Content = newPost.Content,
                 CreatedAt = DateTime.UtcNow
@@ -45,6 +46,7 @@ namespace Blog.Services
                 var updatePost = new PostDTO()
                 {
                     Id = updatedPost.Id,
+                    Title = updatedPost.Title,
                     Category = updatedPost.Category,
                     Content = updatedPost.Content,
                     CreatedAt = oldPost!.CreatedAt,
