@@ -17,6 +17,7 @@
 <br/>
 
 ## Note!
-- 아직 DB 저장 하지 않음
-- 모든 변수가 필수값이 아닌 상태
-- Error Message 생성하지 않음
+- 아직 DB 저장 하지 않음 ➡️ DB 연결 예정 
+- Request의 모든 변수가 필수값이 아닌 상태 ➡️ 필수값으로 Update 예정
+- Error Message 생성하지 않음 ➡️ 상의 필요❗
+
